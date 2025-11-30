@@ -34,18 +34,18 @@ app.add_middleware(
 )
 
 
-@app.get("/", response_class=HTMLResponse)
+@app.get("/api", response_class=HTMLResponse)
 async def get_root():
     async with aiofiles.open("pages/api.html", "r") as f:
         return HTMLResponse(content=await f.read())
     
 
-@app.get("/docs")
+@app.get("/api/docs")
 def get_docs():
     return RedirectResponse(url="https://github.com/berrysauce/ingredients/blob/main/README.md#-using-the-api", status_code=301)
 
 
-@app.get("/ingredients", response_class=JSONResponse)
+@app.get("/api/ingredients", response_class=JSONResponse)
 async def get_scan(url: str, includeCategories: Optional[bool] = False):
     
     # increase compatibility
@@ -111,7 +111,7 @@ async def get_scan(url: str, includeCategories: Optional[bool] = False):
         raise HTTPException(status_code=500, detail=f"Server error")
         
         
-@app.get("/icon/{icon}")
+@app.get("/api/icon/{icon}")
 async def get_icon(icon: str, response: Response):
     # increase compatibility
     if ".png" not in icon:

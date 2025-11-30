@@ -25,7 +25,7 @@
         error = null;
 
         try {
-            let response = await fetch(`https://api.${hostname}/ingredients?url=${scanURL}&includeCategories=true`);
+            let response = await fetch(`/api/ingredients?url=${scanURL}&includeCategories=true`);
             let data = await response.json();
 
             if (!response.ok) {
